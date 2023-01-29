@@ -1,19 +1,48 @@
-plugins {
-    id 'java'
+//gradle이 빌드되기 전 실행되는 설정
+buildscript {
+    ext {
+        springBootVersion = '2.4.3'
+
+        repositories {
+            mavenCentral()
+        }
+
+        dependencies {
+            classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+            classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+        }
+    }
 }
 
-group 'taehoon.excercise'
-version '1.0-SNAPSHOT'
+//현재 루트 프로젝트와 앞으로 추가될 서브 모듈에 대한 설정
+allprojects {}
 
-repositories {
-    mavenCentral()
+//전체 서브 모듈에 대한 설정
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group 'taehoon.excercise'
+    version '1.0'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.16'
+        annotationProcessor 'org.projectlombok:lombok:1.18.16'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}
-
-test {
-    useJUnitPlatform()
+project(':api') {
+    dependencies {
+        implementation project(':exerciseCore')
+    }
 }

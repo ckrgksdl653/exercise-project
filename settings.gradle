@@ -1,2 +1,4 @@
 rootProject.name = 'excercise-backend'
+include 'api'
+include 'exerciseCore'
 
