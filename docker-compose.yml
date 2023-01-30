@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  application:
+    build: .
+    restart: always
+    ports:
+      - 9000:8080
+    container_name: exercise_app
+    networks:
+      - test_application_network
+networks:
+  test_application_network:
+    driver: bridge
+
+
