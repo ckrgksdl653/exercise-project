@@ -15,7 +15,7 @@ public class BackExercise {
 
     @GetMapping("/get/simple")
     public boolean readBackInformation() {
-        return backExerciseService.read();
+        return backExerciseService.getBackExerciseInfo();
     }
 
 }
