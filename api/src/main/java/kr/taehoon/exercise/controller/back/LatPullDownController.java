@@ -1,6 +1,10 @@
 package kr.taehoon.exercise.controller.back;
 
 import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Parameter;
+import kr.taehoon.exercise.io.web.request.CreateRequest;
+import kr.taehoon.exercise.io.web.request.UpdateRequest;
+import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +27,8 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public boolean createLatPullDown() {
-        return backExerciseService.read();
+    public StatusResponse createLatPullDown(@RequestBody CreateRequest request) {
+        return StatusResponse.builder().result(false).build();
     }
 
     @ApiOperation(value = "Lat Pull Down과 관련된 전체 데이터를 조회하는 기능"
@@ -47,7 +51,9 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public boolean readLatPullDownDataById(@PathVariable long id) {
+    public boolean readLatPullDownDataById(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id) {
         return backExerciseService.read();
     }
 
@@ -107,8 +113,11 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public boolean updateLatPullDownMinWeightData(@PathVariable long id) {
-        return backExerciseService.read();
+    public StatusResponse updateLatPullDownMinWeightData(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id,
+            @RequestBody UpdateRequest request) {
+        return StatusResponse.builder().result(false).build();
     }
 
     @ApiOperation(value = "Lat Pull Down 데이터를 제거하는 기능"
@@ -119,8 +128,10 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public boolean deleteLatPullDownMinWeightData(@PathVariable long id) {
-        return backExerciseService.read();
+    public StatusResponse deleteLatPullDownMinWeightData(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id) {
+        return StatusResponse.builder().result(false).build();
     }
 
 

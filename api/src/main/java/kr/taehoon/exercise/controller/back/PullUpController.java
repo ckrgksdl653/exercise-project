@@ -2,6 +2,10 @@ package kr.taehoon.exercise.controller.back;
 
 
 import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Parameter;
+import kr.taehoon.exercise.io.web.request.CreateRequest;
+import kr.taehoon.exercise.io.web.request.UpdateRequest;
+import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +28,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public boolean createPullUp() {
-        return backExerciseService.read();
+    public StatusResponse createPullUp(@RequestBody CreateRequest request) {
+        return StatusResponse.builder().result(false).build();
     }
 
     @ApiOperation(value = "Pull Up과 관련된 전체 데이터를 조회하는 기능"
@@ -48,7 +52,9 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public boolean readPullUpDataById(@PathVariable long id) {
+    public boolean readPullUpDataById(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id) {
         return backExerciseService.read();
     }
 
@@ -108,8 +114,11 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public boolean updatePullUpMinWeightData(@PathVariable long id) {
-        return backExerciseService.read();
+    public StatusResponse updatePullUpMinWeightData(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id,
+            @RequestBody UpdateRequest request) {
+        return StatusResponse.builder().result(false).build();
     }
 
     @ApiOperation(value = "Pull Up 데이터를 제거하는 기능"
@@ -120,8 +129,10 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public boolean deletePullUpMinWeightData(@PathVariable long id) {
-        return backExerciseService.read();
+    public StatusResponse deletePullUpMinWeightData(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id) {
+        return StatusResponse.builder().result(false).build();
     }
 
 

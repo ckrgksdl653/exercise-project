@@ -1,6 +1,10 @@
 package kr.taehoon.exercise.controller.back;
 
 import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Parameter;
+import kr.taehoon.exercise.io.web.request.CreateRequest;
+import kr.taehoon.exercise.io.web.request.UpdateRequest;
+import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +27,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public boolean createBarbellRow() {
-        return backExerciseService.read();
+    public StatusResponse createBarbellRow(@RequestBody CreateRequest request) {
+        return StatusResponse.builder().result(false).build();
     }
 
     @ApiOperation(value = "barbell row과 관련된 전체 데이터를 조회하는 기능"
@@ -47,7 +51,9 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public boolean readBarbellRowDataById(@PathVariable long id) {
+    public boolean readBarbellRowDataById(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id) {
         return backExerciseService.read();
     }
 
@@ -107,8 +113,10 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public boolean updateBarbellRowMinWeightData(@PathVariable long id) {
-        return backExerciseService.read();
+    public StatusResponse updateBarbellRowMinWeightData(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id, @RequestBody UpdateRequest request) {
+        return StatusResponse.builder().result(false).build();
     }
 
     @ApiOperation(value = "barbell row 데이터를 제거하는 기능"
@@ -119,8 +127,10 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public boolean deleteBarbellRowMinWeightData(@PathVariable long id) {
-        return backExerciseService.read();
+    public StatusResponse deleteBarbellRowMinWeightData(
+            @Parameter(name = "id", description = "세트의 id")
+            @PathVariable long id) {
+        return StatusResponse.builder().result(false).build();
     }
 
 
