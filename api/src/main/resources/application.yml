@@ -1,2 +1,18 @@
+spring:
+  application:
+    name: "exercise"
+  profiles:
+    group:
+      local:
+        - localdb
+        - swagger
+      dev:
+        - devdb
+        - swagger
+      prod:
+        - proddb
+    active: prod
+
 server:
   port: 14000
+

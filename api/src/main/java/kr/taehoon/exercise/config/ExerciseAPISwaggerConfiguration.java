@@ -2,6 +2,7 @@ package kr.taehoon.exercise.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -23,8 +24,9 @@ import java.util.Set;
 @EnableSwagger2
 public class ExerciseAPISwaggerConfiguration implements WebMvcConfigurer {
 
+    @Profile("!prod")
     @Bean
-    public Docket swaggerApi() {
+    public Docket enable() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .consumes(getConsumeContentTypes())
                 .produces(getProduceContentTypes())
@@ -34,6 +36,13 @@ public class ExerciseAPISwaggerConfiguration implements WebMvcConfigurer {
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false);
+    }
+
+    @Profile("prod")
+    @Bean
+    public Docket disable() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .enable(false);
     }
 
     @Override
