@@ -45,7 +45,7 @@ public class ExerciseAPISwaggerConfiguration implements WebMvcConfigurer {
     }
 
     private ApiInfo swaggerInfo() {
-        return new ApiInfoBuilder().title("Exercise API").description("Exercise API Documents. 이태경, 김홍재 개발").build();
+        return new ApiInfoBuilder().title("Exercise API").description("Exercise API Documents.").build();
     }
 
     private Set<String> getConsumeContentTypes() {
