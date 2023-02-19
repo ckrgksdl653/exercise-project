@@ -4,6 +4,7 @@ import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import kr.taehoon.exercise.io.web.request.CreateRequest;
 import kr.taehoon.exercise.io.web.request.UpdateRequest;
+import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +40,8 @@ public class DumbbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public boolean readAllDumbbellRowData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readAllDumbbellRowData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "dumbbell row과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -51,10 +52,10 @@ public class DumbbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public boolean readDumbbellRowDataById(
+    public BasicInformationResponse readDumbbellRowDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return backExerciseService.read();
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "dumbbell row했을 때 최고 횟수를 조회하는 기능"
@@ -65,8 +66,8 @@ public class DumbbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public boolean readDumbbellRowMaxCountData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readDumbbellRowMaxCountData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "dumbbell row했을 때 최저 횟수를 조회하는 기능"
@@ -77,8 +78,8 @@ public class DumbbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public boolean readDumbbellRowMinCountData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readDumbbellRowMinCountData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "dumbbell row했을 때 최고 중량을 조회하는 기능"
@@ -89,8 +90,8 @@ public class DumbbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public boolean readDumbbellRowMaxWeightData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readDumbbellRowMaxWeightData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "dumbbell row했을 때 최저 중량을 조회하는 기능"
@@ -101,8 +102,8 @@ public class DumbbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public boolean readDumbbellRowMinWeightData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readDumbbellRowMinWeightData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "dumbbell row 데이터를 업데이트하는 기능"

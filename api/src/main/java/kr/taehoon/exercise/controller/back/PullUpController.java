@@ -5,6 +5,7 @@ import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import kr.taehoon.exercise.io.web.request.CreateRequest;
 import kr.taehoon.exercise.io.web.request.UpdateRequest;
+import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +41,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public boolean readAllPullUpData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readAllPullUpData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "Pull Up과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -52,10 +53,10 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public boolean readPullUpDataById(
+    public BasicInformationResponse readPullUpDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return backExerciseService.read();
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "Pull Up했을 때 최고 횟수를 조회하는 기능"
@@ -66,8 +67,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public boolean readPullUpMaxCountData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readPullUpMaxCountData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "Pull Up했을 때 최저 횟수를 조회하는 기능"
@@ -78,8 +79,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public boolean readPullUpMinCountData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readPullUpMinCountData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "Pull Up했을 때 최고 중량을 조회하는 기능"
@@ -90,8 +91,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public boolean readPullUpMaxWeightData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readPullUpMaxWeightData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "Pull Up했을 때 최저 중량을 조회하는 기능"
@@ -102,8 +103,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public boolean readPullUpMinWeightData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readPullUpMinWeightData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "Pull Up 데이터를 업데이트하는 기능"

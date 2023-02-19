@@ -4,6 +4,7 @@ import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import kr.taehoon.exercise.io.web.request.CreateRequest;
 import kr.taehoon.exercise.io.web.request.UpdateRequest;
+import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/back/barbell-row")
 public class BarbellRowController {
-
-    private final BackExerciseService backExerciseService;
 
     @ApiOperation(value = "barbell row과 관련된 데이터를 입력받는 기능"
             , notes = "사용자로부터 한 세트당 수행한 횟수와 무게를 입력받도록 한다. 여기서 무게는 중량을 이용했을 때만 받도록 한다. " +
@@ -39,8 +38,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public boolean readAllBarbellRowData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readAllBarbellRowData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "barbell row과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -51,10 +50,10 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public boolean readBarbellRowDataById(
+    public BasicInformationResponse readBarbellRowDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return backExerciseService.read();
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "barbell row했을 때 최고 횟수를 조회하는 기능"
@@ -65,8 +64,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public boolean readBarbellRowMaxCountData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readBarbellRowMaxCountData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "barbell row했을 때 최저 횟수를 조회하는 기능"
@@ -77,8 +76,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public boolean readBarbellRowMinCountData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readBarbellRowMinCountData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "barbell row했을 때 최고 중량을 조회하는 기능"
@@ -89,8 +88,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public boolean readBarbellRowMaxWeightData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readBarbellRowMaxWeightData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "barbell row했을 때 최저 중량을 조회하는 기능"
@@ -101,8 +100,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public boolean readBarbellRowMinWeightData() {
-        return backExerciseService.read();
+    public BasicInformationResponse readBarbellRowMinWeightData() {
+        return BasicInformationResponse.builder().build();
     }
 
     @ApiOperation(value = "barbell row 데이터를 업데이트하는 기능"
