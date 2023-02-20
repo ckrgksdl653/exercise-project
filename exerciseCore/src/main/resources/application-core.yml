@@ -1,0 +1,22 @@
+spring:
+  config:
+    activate:
+      on-profile: "localdb"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "devdb"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "proddb"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "swagger"
