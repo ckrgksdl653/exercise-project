@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class BasicInformationResponse {
 
-    @Schema(description = "중량", defaultValue = "0")
+    @Schema(description = "세트 아이디", defaultValue = "0")
     private long id;
 
     @Schema(description = "중량", defaultValue = "0")

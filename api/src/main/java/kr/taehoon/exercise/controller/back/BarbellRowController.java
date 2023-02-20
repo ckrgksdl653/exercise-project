@@ -8,7 +8,13 @@ import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Api(tags = {"Barbell Row API"})
@@ -26,8 +32,9 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public StatusResponse createBarbellRow(@RequestBody CreateRequest request) {
-        return StatusResponse.builder().result(false).build();
+    public ResponseEntity<StatusResponse> createBarbellRow(@RequestBody CreateRequest request) {
+        return ResponseEntity.created(URI.create("/api/v1/back/barbell-row"))
+                .body(StatusResponse.builder().result(true).build());
     }
 
     @ApiOperation(value = "barbell row과 관련된 전체 데이터를 조회하는 기능"
@@ -38,8 +45,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public BasicInformationResponse readAllBarbellRowData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<List<BasicInformationResponse>> readAllBarbellRowData() {
+        return ResponseEntity.ok(Arrays.asList(BasicInformationResponse.builder().build()));
     }
 
     @ApiOperation(value = "barbell row과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -50,10 +57,10 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public BasicInformationResponse readBarbellRowDataById(
+    public ResponseEntity<BasicInformationResponse> readBarbellRowDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return BasicInformationResponse.builder().build();
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "barbell row했을 때 최고 횟수를 조회하는 기능"
@@ -64,8 +71,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public BasicInformationResponse readBarbellRowMaxCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readBarbellRowMaxCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "barbell row했을 때 최저 횟수를 조회하는 기능"
@@ -76,8 +83,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public BasicInformationResponse readBarbellRowMinCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readBarbellRowMinCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "barbell row했을 때 최고 중량을 조회하는 기능"
@@ -88,8 +95,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public BasicInformationResponse readBarbellRowMaxWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readBarbellRowMaxWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "barbell row했을 때 최저 중량을 조회하는 기능"
@@ -100,8 +107,8 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public BasicInformationResponse readBarbellRowMinWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readBarbellRowMinWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "barbell row 데이터를 업데이트하는 기능"
@@ -112,10 +119,10 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public StatusResponse updateBarbellRowMinWeightData(
+    public ResponseEntity<StatusResponse> updateBarbellRowMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id, @RequestBody UpdateRequest request) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
     @ApiOperation(value = "barbell row 데이터를 제거하는 기능"
@@ -126,10 +133,10 @@ public class BarbellRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public StatusResponse deleteBarbellRowMinWeightData(
+    public ResponseEntity<StatusResponse> deleteBarbellRowMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
 

@@ -8,7 +8,12 @@ import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Api(tags = {"Lat Pull Down API"})
@@ -28,8 +33,9 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public StatusResponse createLatPullDown(@RequestBody CreateRequest request) {
-        return StatusResponse.builder().result(false).build();
+    public ResponseEntity<StatusResponse> createLatPullDown(@RequestBody CreateRequest request) {
+        return ResponseEntity.created(URI.create("/api/v1/back/lat-pull-down"))
+                .body(StatusResponse.builder().result(true).build());
     }
 
     @ApiOperation(value = "Lat Pull Down과 관련된 전체 데이터를 조회하는 기능"
@@ -40,8 +46,8 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public BasicInformationResponse readAllLatPullDownData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<List<BasicInformationResponse>> readAllLatPullDownData() {
+        return ResponseEntity.ok(Arrays.asList(BasicInformationResponse.builder().build()));
     }
 
     @ApiOperation(value = "Lat Pull Down과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -52,10 +58,10 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public BasicInformationResponse readLatPullDownDataById(
+    public ResponseEntity<BasicInformationResponse> readLatPullDownDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return BasicInformationResponse.builder().build();
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Lat Pull Down했을 때 최고 횟수를 조회하는 기능"
@@ -66,8 +72,8 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public BasicInformationResponse readLatPullDownMaxCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readLatPullDownMaxCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Lat Pull Down했을 때 최저 횟수를 조회하는 기능"
@@ -78,8 +84,8 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public BasicInformationResponse readLatPullDownMinCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readLatPullDownMinCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Lat Pull Down했을 때 최고 중량을 조회하는 기능"
@@ -90,8 +96,8 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public BasicInformationResponse readLatPullDownMaxWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readLatPullDownMaxWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Lat Pull Down했을 때 최저 중량을 조회하는 기능"
@@ -102,8 +108,8 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public BasicInformationResponse readLatPullDownMinWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readLatPullDownMinWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Lat Pull Down 데이터를 업데이트하는 기능"
@@ -114,11 +120,11 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public StatusResponse updateLatPullDownMinWeightData(
+    public ResponseEntity<StatusResponse> updateLatPullDownMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id,
             @RequestBody UpdateRequest request) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
     @ApiOperation(value = "Lat Pull Down 데이터를 제거하는 기능"
@@ -129,10 +135,10 @@ public class LatPullDownController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public StatusResponse deleteLatPullDownMinWeightData(
+    public ResponseEntity<StatusResponse> deleteLatPullDownMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
 

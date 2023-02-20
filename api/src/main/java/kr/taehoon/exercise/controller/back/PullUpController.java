@@ -9,7 +9,12 @@ import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Api(tags = {"Pull Up API"})
@@ -29,8 +34,9 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public StatusResponse createPullUp(@RequestBody CreateRequest request) {
-        return StatusResponse.builder().result(false).build();
+    public ResponseEntity<StatusResponse> createPullUp(@RequestBody CreateRequest request) {
+        return ResponseEntity.created(URI.create("/api/v1/back/pull-up"))
+                .body(StatusResponse.builder().result(true).build());
     }
 
     @ApiOperation(value = "Pull Up과 관련된 전체 데이터를 조회하는 기능"
@@ -41,8 +47,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public BasicInformationResponse readAllPullUpData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<List<BasicInformationResponse>> readAllPullUpData() {
+        return ResponseEntity.ok(Arrays.asList(BasicInformationResponse.builder().build()));
     }
 
     @ApiOperation(value = "Pull Up과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -53,10 +59,10 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public BasicInformationResponse readPullUpDataById(
+    public ResponseEntity<BasicInformationResponse> readPullUpDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return BasicInformationResponse.builder().build();
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Pull Up했을 때 최고 횟수를 조회하는 기능"
@@ -67,8 +73,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public BasicInformationResponse readPullUpMaxCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readPullUpMaxCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Pull Up했을 때 최저 횟수를 조회하는 기능"
@@ -79,8 +85,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public BasicInformationResponse readPullUpMinCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readPullUpMinCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Pull Up했을 때 최고 중량을 조회하는 기능"
@@ -91,8 +97,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public BasicInformationResponse readPullUpMaxWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readPullUpMaxWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Pull Up했을 때 최저 중량을 조회하는 기능"
@@ -103,8 +109,8 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public BasicInformationResponse readPullUpMinWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readPullUpMinWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "Pull Up 데이터를 업데이트하는 기능"
@@ -115,11 +121,11 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public StatusResponse updatePullUpMinWeightData(
+    public ResponseEntity<StatusResponse> updatePullUpMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id,
             @RequestBody UpdateRequest request) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
     @ApiOperation(value = "Pull Up 데이터를 제거하는 기능"
@@ -130,10 +136,10 @@ public class PullUpController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public StatusResponse deletePullUpMinWeightData(
+    public ResponseEntity<StatusResponse> deletePullUpMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
 

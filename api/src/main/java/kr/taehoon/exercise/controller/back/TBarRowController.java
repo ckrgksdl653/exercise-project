@@ -8,7 +8,12 @@ import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Api(tags = {"T Bar Row API"})
@@ -28,8 +33,9 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PostMapping()
-    public StatusResponse createTbarRow(@RequestBody CreateRequest request) {
-        return StatusResponse.builder().result(false).build();
+    public ResponseEntity<StatusResponse> createTbarRow(@RequestBody CreateRequest request) {
+        return ResponseEntity.created(URI.create("/api/v1/back/tbar-row"))
+                .body(StatusResponse.builder().result(true).build());
     }
 
     @ApiOperation(value = "tbar row과 관련된 전체 데이터를 조회하는 기능"
@@ -40,8 +46,8 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping()
-    public BasicInformationResponse readAllTbarRowData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<List<BasicInformationResponse>> readAllTbarRowData() {
+        return ResponseEntity.ok(Arrays.asList(BasicInformationResponse.builder().build()));
     }
 
     @ApiOperation(value = "tbar row과 관련된 특정 세트 데이터를 조회하는 기능"
@@ -52,10 +58,10 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/{id}")
-    public BasicInformationResponse readTbarRowDataById(
+    public ResponseEntity<BasicInformationResponse> readTbarRowDataById(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return BasicInformationResponse.builder().build();
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "tbar row했을 때 최고 횟수를 조회하는 기능"
@@ -66,8 +72,8 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-count")
-    public BasicInformationResponse readTbarRowMaxCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readTbarRowMaxCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "tbar row했을 때 최저 횟수를 조회하는 기능"
@@ -78,8 +84,8 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-count")
-    public BasicInformationResponse readTbarRowMinCountData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readTbarRowMinCountData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "tbar row했을 때 최고 중량을 조회하는 기능"
@@ -90,8 +96,8 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/max-weight")
-    public BasicInformationResponse readTbarRowMaxWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readTbarRowMaxWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "tbar row했을 때 최저 중량을 조회하는 기능"
@@ -102,8 +108,8 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @GetMapping("/min-weight")
-    public BasicInformationResponse readTbarRowMinWeightData() {
-        return BasicInformationResponse.builder().build();
+    public ResponseEntity<BasicInformationResponse> readTbarRowMinWeightData() {
+        return ResponseEntity.ok(BasicInformationResponse.builder().build());
     }
 
     @ApiOperation(value = "tbar row 데이터를 업데이트하는 기능"
@@ -114,11 +120,11 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @PutMapping("/{id}")
-    public StatusResponse updateTbarRowMinWeightData(
+    public ResponseEntity<StatusResponse> updateTbarRowMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id,
             @RequestBody UpdateRequest request) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
     @ApiOperation(value = "tbar row 데이터를 제거하는 기능"
@@ -129,10 +135,10 @@ public class TBarRowController {
             @ApiResponse(code = 500, message = "server error")
     })
     @DeleteMapping("/{id}")
-    public StatusResponse deleteTbarRowMinWeightData(
+    public ResponseEntity<StatusResponse> deleteTbarRowMinWeightData(
             @Parameter(name = "id", description = "세트의 id")
             @PathVariable long id) {
-        return StatusResponse.builder().result(false).build();
+        return ResponseEntity.ok(StatusResponse.builder().result(false).build());
     }
 
 

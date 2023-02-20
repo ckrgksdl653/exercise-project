@@ -11,7 +11,7 @@ spring:
         - swagger
       prod:
         - proddb
-    active: prod
+    active: dev
 
 server:
   port: 14000
