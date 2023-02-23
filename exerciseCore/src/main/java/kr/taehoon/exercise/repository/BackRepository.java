@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface BackExerciseRepository extends JpaRepository<BackExercise, Long> {
+public interface BackRepository extends JpaRepository<BackExercise, Long> {
 }

@@ -1,9 +1,11 @@
 package kr.taehoon.exercise.dto.response;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
 
+@Builder
 @Data
 public class BackExerciseResponse {
 

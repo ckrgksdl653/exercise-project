@@ -1,20 +1,44 @@
 package kr.taehoon.exercise.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@ToString
-@Entity
-public class BackExercise extends Exercise {
+import static javax.persistence.FetchType.LAZY;
 
-    @Column(name = "weight")
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "BACK")
+@Entity
+public class BackExercise {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Setter
+    @Column(name = "WEIGHT")
     private double weight;
 
-    @Column(nullable = false, name = "count")
+    @Setter
+    @Column(nullable = false, name = "COUNT")
     private int count;
+
+    @Setter
+    @Column(nullable = false, name = "TYPE_ID")
+    private String typeId;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "UPPER_ID")
+    private UpperBody upperBody;
+
+    public void setUpperBody(UpperBody upperBody) {
+        if (this.upperBody != null) {
+            this.upperBody.getBackExerciseList().remove(this);
+        }
+        this.upperBody = upperBody;
+        upperBody.getBackExerciseList().add(this);
+    }
 }

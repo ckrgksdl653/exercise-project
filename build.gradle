@@ -32,6 +32,8 @@ subprojects {
     }
 
     dependencies {
+        implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+        implementation 'org.slf4j:slf4j-simple:1.7.30'
         compileOnly 'org.projectlombok:lombok:1.18.16'
         annotationProcessor 'org.projectlombok:lombok:1.18.16'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
