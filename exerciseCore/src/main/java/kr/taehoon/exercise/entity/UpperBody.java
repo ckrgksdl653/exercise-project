@@ -17,7 +17,7 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "UPPER_BODY")
 public class UpperBody {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = LAZY)

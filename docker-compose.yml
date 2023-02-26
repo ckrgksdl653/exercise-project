@@ -1,31 +1,41 @@
 version: "3.7"
 
 services:
-  application:
-    build: .
-    restart: always
-    ports:
-      - 14000:14000
-    container_name: exercise_app
-    depends_on:
-      - mariaDB
-    networks:
-      - test_application_network
   mariaDB:
-    container_name: mariadb
-    image: mariadb:10.8.3
+    container_name: mariaDB
+    image: mariadb
     init: true
+    volumes:
+      - ./mariadb/etc/mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./mariadb/var/lib/mysql:/var/lib/mysql
+      - ./mariadb/var/log/maria:/var/log/maria
     command:
       - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
     user: root
     ports:
-      - 3306:3306
+      - 13306:3306
     restart: always
     env_file: .env
+    networks:
+      - test_application_network
+
+  application:
+    build: .
+    restart: always
+    ports:
+      - 14000:14000
+    container_name: exercise_app
     environment:
-      TZ: Asia/Seoul
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariaDB:3306/exercise
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: taehoon123
+    depends_on:
+      - mariaDB
+    networks:
+      - test_application_network
+
 networks:
   test_application_network:
     driver: bridge

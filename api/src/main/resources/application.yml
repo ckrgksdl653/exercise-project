@@ -12,7 +12,15 @@ spring:
       prod:
         - proddb
     active: dev
+---
 
 server:
   port: 14000
-
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        type.descriptor.sql: INFO
+        SQL: DEBUG
+      springframework: INFO
