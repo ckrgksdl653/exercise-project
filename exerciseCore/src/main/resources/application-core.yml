@@ -23,19 +23,19 @@ spring:
   config:
     activate:
       on-profile: devdb
-#  datasource:
-#    schema: classpath*:sql/schema.sql
+  datasource:
+    hikari:
+      pool-name: excercise-core
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto:
-        auto: update
+      ddl-auto: update
     open-in-view: true
     show-sql: true
     properties:
       hibernate.format_sql: true
+      dialect: org.hibernate.dialect.MariaDB103Dialect
 
 ---
 

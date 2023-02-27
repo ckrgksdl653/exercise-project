@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,7 +67,9 @@ public class BackExerciseServiceImpl implements BackExerciseService {
     }
 
     private BackExercise backExerciseRequestToBackExercise(BackExerciseRequest backExerciseRequest, Back back) {
-        MusculerStrength musculerStrength = MusculerStrength.builder().build();
+        MusculerStrength musculerStrength = MusculerStrength.builder()
+                .createTime(ZonedDateTime.now())
+                .build();
         musculerStrengthRepository.save(musculerStrength);
         UpperBody upperBody = UpperBody.builder().musculerStrength(musculerStrength).build();
         upperBodyRepository.save(upperBody);

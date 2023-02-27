@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "kr.taehoon.exercise")
 public class ExerciseApplication {
     public static void main(String[] args) {
+        System.setProperty("spring.config.name", "application, application-core");
         SpringApplication.run(ExerciseApplication.class);
     }
 }

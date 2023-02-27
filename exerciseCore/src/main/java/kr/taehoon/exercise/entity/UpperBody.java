@@ -16,13 +16,19 @@ import static javax.persistence.FetchType.LAZY;
 @AllArgsConstructor
 @Table(name = "UPPER_BODY")
 public class UpperBody {
+
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "MUSCULER_ID")
     private MusculerStrength musculerStrength;
+
+    @OneToMany(mappedBy = "upperBody", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<BackExercise> backExerciseList = new ArrayList<>();
 
     public void setMusculerStrength(MusculerStrength musculerStrength) {
         if (this.musculerStrength != null) {
@@ -31,8 +37,4 @@ public class UpperBody {
         this.musculerStrength = musculerStrength;
         musculerStrength.getUpperBodyList().add(this);
     }
-
-    @OneToMany(mappedBy = "upperBody", cascade = CascadeType.ALL)
-    @Builder.Default
-    private List<BackExercise> backExerciseList = new ArrayList<>();
 }

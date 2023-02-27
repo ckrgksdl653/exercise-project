@@ -29,7 +29,7 @@ services:
     container_name: exercise_app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariaDB:3306/exercise
-      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_USERNAME: taehoon
       SPRING_DATASOURCE_PASSWORD: taehoon123
     depends_on:
       - mariaDB
