@@ -17,11 +17,11 @@ import java.util.List;
 @Table(name = "MUSCULER_STRENGTH")
 public class MusculerStrength {
     @Id
-    @Column()
-    @GeneratedValue
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition="TIMESTAMP")
+    @Column(name = "CREATE_TIME", columnDefinition="TIMESTAMP")
     @CreationTimestamp
     @Builder.Default
     private ZonedDateTime createTime = ZonedDateTime.now();

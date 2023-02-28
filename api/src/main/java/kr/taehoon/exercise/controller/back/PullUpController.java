@@ -3,12 +3,15 @@ package kr.taehoon.exercise.controller.back;
 
 import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.Parameter;
+import kr.taehoon.exercise.dto.request.BackExerciseRequest;
 import kr.taehoon.exercise.io.web.request.CreateRequest;
 import kr.taehoon.exercise.io.web.request.UpdateRequest;
 import kr.taehoon.exercise.io.web.response.BasicInformationResponse;
 import kr.taehoon.exercise.io.web.response.StatusResponse;
 import kr.taehoon.exercise.service.BackExerciseService;
+import kr.taehoon.exercise.util.Back;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Api(tags = {"Pull Up API"})
 @RestController
@@ -35,8 +39,11 @@ public class PullUpController {
     })
     @PostMapping()
     public ResponseEntity<StatusResponse> createPullUp(@RequestBody CreateRequest request) {
+        log.info("request : {}", request);
+        boolean result = backExerciseService.createBackExerciseInfo(BackExerciseRequest.builder()
+                .weight(request.getWeight()).count(request.getCount()).build(), Back.PULL_UP);
         return ResponseEntity.created(URI.create("/api/v1/back/pull-up"))
-                .body(StatusResponse.builder().result(true).build());
+                .body(StatusResponse.builder().result(result).build());
     }
 
     @ApiOperation(value = "Pull Up과 관련된 전체 데이터를 조회하는 기능"

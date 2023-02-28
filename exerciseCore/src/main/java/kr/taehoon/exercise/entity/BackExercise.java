@@ -15,7 +15,8 @@ import static javax.persistence.FetchType.LAZY;
 public class BackExercise {
 
     @Id
-    @GeneratedValue
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Setter
